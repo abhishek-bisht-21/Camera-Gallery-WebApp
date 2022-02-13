@@ -6,6 +6,7 @@ let caotureBtn = document.querySelector(".capture-btn");
 
 let recordFlag = false;
 let recorder;
+let chunks  = []; // Media Data in Chucks
 
 
 let constraints = {
@@ -21,6 +22,30 @@ navigator.mediaDevices.getUserMedia(constraints)
 
 	// API to record. What to record -> Stream
 	recorder = new MediaRecorder(stream);
+
+	// Task to perfrom when we are starting recording
+	recorder.addEventListener("start", (e) => {
+		// We want to record multiple times. Therefore we have to empty
+		// our chunks array time and again.
+		chunks = [];
+	})
+
+	// Download the Stream
+	recorder.addEventListener("dataavailable", (e) => {
+		chunks.push(e.data);
+	})
+
+	// Task to perform when we are stopping recording
+	recorder.addEventListener("stop", (e) =>{
+		// Conversion of Media chunks data to Video
+		let blob = new Blob(chunks, {type:"video/mp4"});
+		let videoURL = URL.createObjectURL(blob);
+
+		let a  = document.createElement("a");
+		a.href = videoURL;
+		a.download = "stream.mp4";
+		a.click();
+	})
 })
 
 
