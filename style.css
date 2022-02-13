@@ -90,3 +90,15 @@ video{
 		transform: scale(1.1);
 	}
 }
+
+
+.timer-cont{
+	
+	position: absolute;
+	color: aqua;
+	left: 5rem;
+	font-size: 0.8rem;
+	bottom: 10rem;
+
+
+}
