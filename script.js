@@ -55,10 +55,12 @@ recordBtnCont.addEventListener("click", (e) => {
     //start
     recorder.start();
     recordBtn.classList.add("scale-record");
+    startTimer();
   } else {
     //stop
     recorder.stop();
     recordBtn.classList.remove("scale-record");
+    stopTimer();
   }
 });
 

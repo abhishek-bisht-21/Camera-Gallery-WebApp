@@ -100,5 +100,8 @@ video{
 	font-size: 0.8rem;
 	bottom: 10rem;
 
+}
 
+.timer{
+	display: none;
 }
