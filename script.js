@@ -40,10 +40,21 @@ navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
     let blob = new Blob(chunks, { type: "video/mp4" });
     let videoURL = URL.createObjectURL(blob);
 
-    let a = document.createElement("a");
-    a.href = videoURL;
-    a.download = "stream.mp4";
-    a.click();
+    if(db){
+       let videoID  = shortId();
+       let dbTransaction = db.transaction("image", "readwrite");
+       let videoStore = dbTransaction.objectStore("video");
+       let videoEntry = {
+         id:videoID,
+         blobData : blob
+       }
+       videoStore.add(videoEntry);
+    }
+
+    // let a = document.createElement("a");
+    // a.href = videoURL;
+    // a.download = "stream.mp4";
+    // a.click();
   });
 });
 
@@ -127,7 +138,7 @@ allFilters.forEach((filterElem) => {
     filterElem.addEventListener("click", (e) => {
         // Get style
         transparentColor = getComputedStyle(filterElem).getPropertyValue("background-color");
-	// Set style
+	      // Set style
         filterLayer.style.backgroundColor = transparentColor;
     })
 })
