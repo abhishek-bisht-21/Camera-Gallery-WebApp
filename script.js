@@ -106,6 +106,11 @@ captureBtnCont.addEventListener("click", (e) => {
    	// a.href = imageURL;
     // 	a.download = "image.jpg";
     // 	a.click();
+
+    setTimeout(() => {
+        captureBtn.classList.remove("scale-capture");
+    }, 500)
+
 })
 
 let timerID;
