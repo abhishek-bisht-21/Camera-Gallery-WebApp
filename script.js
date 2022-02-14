@@ -3,6 +3,7 @@ let recordBtnCont = document.querySelector(".record-btn-cont");
 let recordBtn = document.querySelector(".record-btn");
 let captureBtnCont = document.querySelector(".capture-btn-cont");
 let caotureBtn = document.querySelector(".capture-btn");
+let transparentColor = "transparent";
 
 let recordFlag = false;
 let recorder;
@@ -73,7 +74,12 @@ captureBtnCont.addEventListener("click", (e) => {
 	let tool = canvas.getContext("2d");
 	tool.drawImage(video,0,0,canvas.width,canvas.height);
 
-	let imageURL = canvas.toDataURL;
+	// Filtering 
+ 	tool.fillStyle = transparentColor;
+  	tool.fillRect(0, 0, canvas.width, canvas.height);
+
+	let imageURL = canvas.toDataURL();
+
 	let a = document.createElement("a");
    	a.href = imageURL;
     	a.download = "image.jpg";
@@ -112,3 +118,16 @@ function stopTimer() {
   timer.innerText = "00:00:00";
   timer.style.display = "none";
 }
+
+
+// Filtering Logic
+let filterLayer = document.querySelector(".filter-layer");
+let allFilters = document.querySelectorAll(".filter");
+allFilters.forEach((filterElem) => {
+    filterElem.addEventListener("click", (e) => {
+        // Get style
+        transparentColor = getComputedStyle(filterElem).getPropertyValue("background-color");
+	// Set style
+        filterLayer.style.backgroundColor = transparentColor;
+    })
+})
