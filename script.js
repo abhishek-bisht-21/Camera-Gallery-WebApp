@@ -71,7 +71,7 @@ captureBtnCont.addEventListener("click", (e) => {
 	canvas.height = video.videoHeight;
 
 	let tool = canvas.getContext("2d");
-	tool.drawImage(video,0,0,canvaswidth,canvas.height);
+	tool.drawImage(video,0,0,canvas.width,canvas.height);
 
 	let imageURL = canvas.toDataURL;
 	let a = document.createElement("a");
